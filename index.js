@@ -33,8 +33,14 @@ const buildLvls = {
 
 const taxesMultiplier = Number(options.taxesMultiplier);
 
-const { goldGainedFromFood, goldGainedFromTaxes, goldRequiredForFood, goldInGainedResources, totalGoldProfit } =
-  calculateGoldProfit(buildLvls, taxesMultiplier);
+const {
+  goldGainedFromFood,
+  totalGoldProfitInDays,
+  goldGainedFromTaxes,
+  goldRequiredForFood,
+  goldInGainedResources,
+  totalGoldProfit,
+} = calculateGoldProfit(buildLvls, taxesMultiplier);
 
 const { totalCost: totalBuildCost, buildsCostByType } = getBuildCostsByType(buildLvls);
 
@@ -56,7 +62,7 @@ console.log("Gold in gained resources:".bold, goldInGainedResources);
 console.log("Gold required for food:".bold, goldRequiredForFood);
 console.log(`\n`);
 
-console.log("TOTAL GOLD PROFIT:".bold, String(totalGoldProfit).green);
+console.log("TOTAL GOLD PROFIT IN MINUTE:".bold, String(totalGoldProfit).green);
 console.log(`\n`);
 
 console.log(`--- BUILD COST ---`.bold);
@@ -72,7 +78,7 @@ console.log("TOTAL BUILDS COST:".bold, totalBuildsCost.red);
 
 console.log(`\n`);
 console.log(`--- PROFIT ---`.bold);
-console.log("Gold per Day:".bold, String(totalGoldProfit).magenta);
+console.log("Gold per Real Day:".bold, getNumberWithCommas(totalGoldProfitInDays).green);
 console.log("Return on Investments:".bold, `${(ROI * 100).toFixed(2)} %`.magenta);
 console.log("Cost will return in:".bold, `${daysToReturnCost} days`.magenta);
 
