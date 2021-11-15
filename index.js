@@ -61,35 +61,35 @@ const { ROI, daysToReturnCost } = getProfitStats(totalGoldProfit, totalBuildCost
 const totalBuildsCost = getNumberWithCommas(totalBuildCost);
 
 console.log(`\n\n\n`);
-console.log(`--- SUMMARY ---`.bold);
+console.log(`--- ОТЧЕТ ---`.bold);
 console.log(`\n`);
-console.log("Gain multiplier:".bold, gainMultiplier);
+console.log("Мультипликатор ресурсов:".bold, gainMultiplier);
 console.log(`\n`);
-console.log("Gold gained from food:".bold, goldGainedFromFood);
-console.log("Gold gained from taxes:".bold, goldGainedFromTaxes);
-console.log("Gold in gained resources:".bold, goldInGainedResources);
-console.log("Gold required for food:".bold, goldRequiredForFood);
-console.log(`\n`);
-
-console.log("TOTAL GOLD PROFIT IN MINUTE:".bold, String(totalGoldProfit).green);
+console.log("Золото от продажи еды:".bold, goldGainedFromFood);
+console.log("Золото с налогов:".bold, goldGainedFromTaxes);
+console.log("Золото, полученное в ресурсах (камень, дерево):".bold, goldInGainedResources);
+console.log("Золото, требуемое для еды:".bold, goldRequiredForFood);
 console.log(`\n`);
 
-console.log(`--- BUILD COST ---`.bold);
-console.log("Townhall build cost:".bold, buildsCost.townhall.yellow);
-console.log("Houses build cost:".bold, buildsCost.houses.yellow);
-console.log("Storage build cost:".bold, buildsCost.storage.yellow);
-console.log("Farm build cost:".bold, buildsCost.farm.yellow);
-console.log("Mine build cost:".bold, buildsCost.mine.yellow);
-console.log("Sawmill build cost:".bold, buildsCost.sawmill.yellow);
+console.log("ПРИБЫЛЬ ЗОЛОТА В МИНУТУ:".bold, String(totalGoldProfit).green);
+console.log(`\n`);
+
+console.log(`--- СТОИМОСТЬ УЛУЧШЕНИЙ ---`.bold);
+console.log("Общая стоимость ратуши:".bold, buildsCost.townhall.yellow);
+console.log("Общая стоимость домов:".bold, buildsCost.houses.yellow);
+console.log("Общая стоимость складов:".bold, buildsCost.storage.yellow);
+console.log("Общая стоимость фермы:".bold, buildsCost.farm.yellow);
+console.log("Общая стоимость шахты:".bold, buildsCost.mine.yellow);
+console.log("Общая стоимость лесопилки:".bold, buildsCost.sawmill.yellow);
 
 console.log(`\n`);
-console.log("TOTAL BUILDS COST:".bold, totalBuildsCost.red);
+console.log("ВСЯ СТОИМОСТЬ ПОСТРОЕК:".bold, totalBuildsCost.red);
 
 console.log(`\n`);
-console.log(`--- PROFIT ---`.bold);
-console.log("Gold per Real Day:".bold, getNumberWithCommas(totalGoldProfitInDays).green);
-console.log("Return on Investments:".bold, `${(ROI * 100).toFixed(2)} %`.magenta);
-console.log("Cost will return in:".bold, `${daysToReturnCost} days`.magenta);
+console.log(`--- ПРИБЫЛЬ ---`.bold);
+console.log("Золото в 1 реальный день:".bold, getNumberWithCommas(totalGoldProfitInDays).green);
+console.log("ROI, возврат с затрат:".bold, `${(ROI * 100).toFixed(2)} %`.magenta);
+console.log("Стоимость улучшений окупится через:".bold, `${daysToReturnCost} дней`.magenta);
 
 console.log(`\n\n\n`);
 
