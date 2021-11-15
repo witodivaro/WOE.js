@@ -18,6 +18,7 @@ program
   .requiredOption("-fl --farm-level <number>", "Farm LVL")
   .requiredOption("-sl --storage-level <number>", "Storage LVL")
   .requiredOption("-tm --taxes-multiplier <number>", "Taxes multiplier (1-4)")
+  .option("-x2 --double-gain", "Calculate with double gain enabled")
   .option("-2d --two-dimensions", "Generate 2d profit matrixes")
   .option("-3d --three-dimensions", "Generate 3d profit matrixes")
   .option("-4d --four-dimensions", "Generate 4d profit matrixes");
@@ -25,6 +26,8 @@ program
 program.parse(process.argv);
 
 const options = program.opts();
+
+const gainMultiplier = options.doubleGain ? 2 : 1;
 
 const buildLvls = {
   sawmill: Number(options.sawmillLevel),
@@ -44,7 +47,7 @@ const {
   goldRequiredForFood,
   goldInGainedResources,
   totalGoldProfit,
-} = calculateGoldProfit(buildLvls, taxesMultiplier);
+} = calculateGoldProfit(buildLvls, taxesMultiplier, gainMultiplier);
 
 const { totalCost: totalBuildCost, buildsCostByType } = getBuildCostsByType(buildLvls);
 
@@ -59,6 +62,8 @@ const totalBuildsCost = getNumberWithCommas(totalBuildCost);
 
 console.log(`\n\n\n`);
 console.log(`--- SUMMARY ---`.bold);
+console.log(`\n`);
+console.log("Gain multiplier:".bold, gainMultiplier);
 console.log(`\n`);
 console.log("Gold gained from food:".bold, goldGainedFromFood);
 console.log("Gold gained from taxes:".bold, goldGainedFromTaxes);
@@ -90,18 +95,18 @@ console.log(`\n\n\n`);
 
 if (options.twoDimensions) {
   console.log("Generating Townhall Profit Matrix..".italic);
-  generateTownhallMatrix(buildLvls, taxesMultiplier);
+  generateTownhallMatrix({ buildLvls, taxesMultiplier, gainMultiplier });
 
   console.log("Generating Farm Profit Matrix..".italic);
-  generateFarmMatrix(buildLvls);
+  generateFarmMatrix({ buildLvls, gainMultiplier });
 }
 
 if (options.threeDimensions) {
   console.log("Generating Townhall 3D Matrix..".italic);
-  generate3DTownhallMatrix(buildLvls);
+  generate3DTownhallMatrix({ buildLvls, gainMultiplier });
 }
 
 if (options.fourDimensions) {
   console.log("Generating Farm 4D Matrix..".italic);
-  generate4DFarmMatrix(buildLvls);
+  generate4DFarmMatrix({ buildLvls, gainMultiplier });
 }
