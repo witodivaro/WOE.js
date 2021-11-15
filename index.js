@@ -7,6 +7,8 @@ const { getNumberWithCommas } = require("./lib/formatters");
 const { getProfitStats } = require("./lib/getProfitStats");
 const { generateTownhallMatrix } = require("./lib/matrix/generareTownhallMatrix");
 const { generateFarmMatrix } = require("./lib/matrix/generateFarmMatrix");
+const { generate3DTownhallMatrix } = require("./lib/matrix/generate3DTownhallMatrix");
+const { generate4DFarmMatrix } = require("./lib/matrix/generate4DFarmMatrix");
 
 program
   .requiredOption("-tl --townhall-level <number>", "Townhall LVL")
@@ -16,7 +18,9 @@ program
   .requiredOption("-fl --farm-level <number>", "Farm LVL")
   .requiredOption("-sl --storage-level <number>", "Storage LVL")
   .requiredOption("-tm --taxes-multiplier <number>", "Taxes multiplier (1-4)")
-  .option("-m --matrix", "Generate profit matrixes");
+  .option("-2d --two-dimensions", "Generate 2d profit matrixes")
+  .option("-3d --three-dimensions", "Generate 3d profit matrixes")
+  .option("-4d --four-dimensions", "Generate 4d profit matrixes");
 
 program.parse(process.argv);
 
@@ -84,10 +88,20 @@ console.log("Cost will return in:".bold, `${daysToReturnCost} days`.magenta);
 
 console.log(`\n\n\n`);
 
-if (options.matrix) {
+if (options.twoDimensions) {
   console.log("Generating Townhall Profit Matrix..".italic);
   generateTownhallMatrix(buildLvls, taxesMultiplier);
 
   console.log("Generating Farm Profit Matrix..".italic);
   generateFarmMatrix(buildLvls);
+}
+
+if (options.threeDimensions) {
+  console.log("Generating Townhall 3D Matrix..".italic);
+  generate3DTownhallMatrix(buildLvls);
+}
+
+if (options.fourDimensions) {
+  console.log("Generating Farm 4D Matrix..".italic);
+  generate4DFarmMatrix(buildLvls);
 }
