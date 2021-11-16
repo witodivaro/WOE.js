@@ -1,0 +1,1 @@
+{"mappings":"AAAA;AACA;AACA;AACA;AACA","sources":["graphs/src/styles.css"],"sourcesContent":[".chart-container {\n  width: 500px;\n  height: 500px;\n  margin-left: 200px;\n}\n"],"names":[],"version":3,"file":"index.0355c9f6.css.map","sourceRoot":"/__parcel_source_root/"}

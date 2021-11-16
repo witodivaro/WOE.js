@@ -9,6 +9,7 @@ const { generateTownhallMatrix } = require("./lib/matrix/generareTownhallMatrix"
 const { generateFarmMatrix } = require("./lib/matrix/generateFarmMatrix");
 const { generate3DTownhallMatrix } = require("./lib/matrix/generate3DTownhallMatrix");
 const { generate4DFarmMatrix } = require("./lib/matrix/generate4DFarmMatrix");
+const { generate4DTownhallMatrix } = require("./lib/matrix/generate4DTownhallMatrix");
 
 program
   .requiredOption("-tl --townhall-level <number>", "Townhall LVL")
@@ -21,7 +22,8 @@ program
   .option("-x2 --double-gain", "Calculate with double gain enabled")
   .option("-2d --two-dimensions", "Generate 2d profit matrixes")
   .option("-3d --three-dimensions", "Generate 3d profit matrixes")
-  .option("-4d --four-dimensions", "Generate 4d profit matrixes");
+  .option("-4df --four-dimensions-farm-matrix", "Generate 4d farm profit matrix")
+  .option("-4dtx --four-dimensions-townhall-matrix", "Generate 4d townhall profit matrix");
 
 program.parse(process.argv);
 
@@ -106,7 +108,12 @@ if (options.threeDimensions) {
   generate3DTownhallMatrix({ buildLvls, gainMultiplier });
 }
 
-if (options.fourDimensions) {
+if (options.fourDimensionsFarmMatrix) {
   console.log("Generating Farm 4D Matrix..".italic);
   generate4DFarmMatrix({ buildLvls, gainMultiplier });
+}
+
+if (options.fourDimensionsTownhallMatrix) {
+  console.log("Generating Farm 4D Matrix..".italic);
+  generate4DTownhallMatrix({ buildLvls, gainMultiplier });
 }
